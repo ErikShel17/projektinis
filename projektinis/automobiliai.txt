@@ -1,0 +1,15 @@
+1;Audi;A4;2015;12500.50;Dyzelinas
+2;BMW;320d;2017;16800.00;Dyzelinas
+3;Volkswagen;Golf;2012;5400.00;Benzinas
+4;Toyota;Avensis;2014;8900.00;Benzinas
+5;Opel;Astra;2010;3200.00;Dujos
+6;Ford;Focus;2016;7500.00;Benzinas
+7;Audi;A6;2019;24000.00;Dyzelinas
+8;Mercedes-Benz;C220;2015;14500.00;Dyzelinas
+9;Volvo;XC90;2018;28500.00;Dyzelinas
+10;Skoda;Octavia;2020;19200.00;Benzinas
+11;Nissan;Qashqai;2015;9800.00;Benzinas
+12;Honda;Civic;2013;6700.00;Benzinas
+13;BMW;530;2016;18500.00;Dyzelinas
+14;Toyota;Prius;2015;8200.00;Hibridas
+15;Volkswagen;Passat;2015;9500.00;Dyzelinas
