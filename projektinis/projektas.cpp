@@ -56,6 +56,14 @@ int main() {
         cout << "Pasirinkite veiksma: ";
         cin >> pasirinkimas;
 
+        // APSAUGA: Jeigu meniu pasirinkime įvedamas ne skaičius
+		if (cin.fail()) {
+			cin.clear(); // Išvalyti klaidos būseną
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignoruoti netinkamą įvestį
+			cout << "Klaida: Iveskite skaiciu nuo 0 iki 7." << endl;
+			continue; // Grįžti į meniu pradžią
+		}
+        
         // Sąlygos sakinys switch vartotojo pasirinkimui apdoroti
         switch (pasirinkimas) {
         case 1:
@@ -221,7 +229,7 @@ void redaguotiAutomobili(vector<Automobilis>& sarasas) {
 
     for (size_t i = 0; i < sarasas.size(); i++) {
         if (sarasas[i].id == redaguojamasId) {
-            cout << "\n--- Iveskite naujus duomenis (buvusi reikšme skliausteliuose) ---" << endl;
+            cout << "\n--- Iveskite naujus duomenis (buvusi reiksme skliausteliuose) ---" << endl;
 
             cout << "Nauja marke (" << sarasas[i].marke << "): ";
             cin >> sarasas[i].marke;
