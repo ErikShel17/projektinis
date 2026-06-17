@@ -1,25 +1,29 @@
-# Automobilių duomenų valdymo sistema (projektinis darbas, nenaudoti realybėje!)
+# Automobilių duomenų valdymo sistema
 
 ## Projekto tikslas
-Šio projektinio darbo tikslas - sukurti veikiančią C++ konsolinę programą, pritaikant struktūrinio programavimo principus, išmoktus studijų kurso metu. 
+Sukurti C++ konsolinę programą automobilių duomenims valdyti, pritaikant struktūras (`struct`), dinaminius masyvus (`std::vector`) ir darbą su tekstiniais failais.
 
-## Temos aprašymas
-Programa imituoja automobilių parko informacinę sistemą. Kiekvienas automobilis turi šiuos duomenis: Unikalų įdentifikatorių (ID), markę, modelį, gamybos metus, kainą bei kuro tipą.
+## Pasirinktos temos aprašymas
+Programa imituoja automobilių parko informacinę sistemą. Kiekvienas automobilis bazėje turi šešis atributus: unikalų ID, markę, modelį, gamybos metus, kainą ir kuro tipą.
 
-## Programos funkcionalumas (CRUD)
-* **Create:** Naujo automobilio pridėjimas su automatiniu unikalaus ID generatoriumi.
-* **Read:** Viso sąrašo peržiūra lentelėje arba vieno automobilio paieška pagal jam pritaikytą ID.
-* **Update:** Esamo automobilio duomenų keitimas (skliausteliuose rodo senas reikšmes, kurios bus pakeistos)
-* **Delete:** Automobilio trynimas iš sąrašo naudojant iteratorius.
-* **Apsauga:** Įdiegta įvesties validacija (`cin.fail()`), kuri neleidžia programai vykdyti begalinius ciklus, kai įvesta raidė ar kitas simbolis vietoje skliaustelio.
+## Programos funkcionalumo aprašymas
+Programoje realizuotas pilnas **CRUD** duomenų valdymas ir apsauga:
+* **Create:** Naujo automobilio pridėjimas, ID sugeneruojamas automatiškai.
+* **Read:** Visų automobilių išvedimas lentelėje arba vieno paieška pagal ID.
+* **Update:** Esamo automobilio duomenų redagavimas (rodomos senos reikšmės).
+* **Delete:** Automobilio šalinimas iš sistemos naudojant iteratorius.
+* **Apsauga:** Įvesties validacija (`cin.fail()`), apsauganti programą nuo pakibimo įvedus raidę vietoje skaičiaus.
 
-## Papildomos funkcijos
-1. **Filtravimas:** Automobilių atranka ir išvedimas ekrane pagal pasirinktą markę.
-2. **Statistika:** Ataskaitos generavimas (skaičiuojama vidutinė kaina, naujausi metai, brangiausias automobilis sąraše).
+## Naudojamų failų aprašymas
+* **`automobiliai.txt`** – pagrindinis duomenų failas (virš 15 įrašų). Laukai atskirti skyrikliu `;`. Nuskaitomas paleidus programą, atnaujinamas ją išjungiant.
+* **`ataskaita.txt`** – tekstinis failas, sugeneruojamas automatiškai paleidus statistikos funkciją.
 
-## Kita informacija
-* **automobiliai.txt** - duombazės failas, naudojamas duomenų nuskaitymui startuojant programą, ir įrašomi baigiant ir išsaugant darbą).
-* **ataskaita.txt** - tekstinis failiukas, kuriame išsaugoma sugeneruota programos statistika.
+## Programos paleidimo instrukcija
+1. Įkelkite `automobiliai.txt` failą į tą patį aplanką, kuriame guli `main.cpp`.
+2. Atidarykite projektą per C++ IDE (pvz., Visual Studio) ir paleiskite (F5 / Run).
+3. Konsolėje pasirinkite norimą veiksmą skaičiais nuo `0` iki `7`.
+4. **Svarbu:** Norėdami išsaugoti pakeitimus faile, programą pabaikite pasirinkę punktą `0`.
 
-Ačiū už skaitymą! c:
-
+## Papildomų funkcijų aprašymas
+1. **Filtravimas:** Automobilių atranka ir išvedimas ekrane pagal vartotojo įvestą markę.
+2. **Statistika:** Ataskaitos kūrimas – programa apskaičiuoja bendrą automobilių skaičių, vidutinę kainą, naujausius metus, brangiausią modelį ir įrašo duomenis į `ataskaita.txt`.
