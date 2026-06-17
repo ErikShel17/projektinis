@@ -393,4 +393,4 @@ void generuotiAtaskaita(const vector<Automobilis>& sarasas) {
     cout << "\nStatistine ataskaita sekmingai sugeneruota ir irasyta i faila 'ataskaita.txt'!" << endl;
 }
 
-add this last half of the code left
+// Kodo pabaiga
