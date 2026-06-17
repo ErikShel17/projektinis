@@ -244,65 +244,6 @@ void redaguotiAutomobili(vector<Automobilis>& sarasas) {
     }
     cout << "Automobilis su ID " << redaguojamasId << " nerastas." << endl;
 }
-// Funkcija (CREATE): sukuria naują įrašą ir automatiškai suteikia jam unikalų ID
-void pridetiAutomobili(vector<Automobilis>& sarasas) {
-    Automobilis naujas;
-
-    // Automatinis ID generavimas (surandamas didžiausias esamas ID ir pridedamas 1)
-    int maxId = 0;
-    for (size_t i = 0; i < sarasas.size(); i++) {
-        if (sarasas[i].id > maxId) {
-            maxId = sarasas[i].id;
-        }
-    }
-    naujas.id = maxId + 1;
-
-    cout << "Iveskite marke: ";
-    cin >> naujas.marke;
-    cout << "Iveskite modeli: ";
-    cin >> naujas.modelis;
-    cout << "Iveskite gamybos metus: ";
-    cin >> naujas.gamybosMetai;
-    cout << "Iveskite kaina: ";
-    cin >> naujas.kaina;
-    cout << "Iveskite kuro tipa (Benzinas/Dyzelinas/Dujos/Hibridas): ";
-    cin >> naujas.kuroTipas;
-
-    sarasas.push_back(naujas);
-    cout << "\nAutomobilis sekmingai pridetas! Suteiktas ID: " << naujas.id << endl;
-}
-
-// Funkcija (UPDATE): redaguoja jau egzistuojantį automobilio įrašą pagal ID
-void redaguotiAutomobili(vector<Automobilis>& sarasas) {
-    int redaguojamasId;
-    cout << "Iveskite automobilio ID, kuri norite redaguoti: ";
-    cin >> redaguojamasId;
-
-    for (size_t i = 0; i < sarasas.size(); i++) {
-        if (sarasas[i].id == redaguojamasId) {
-            cout << "\n--- Iveskite naujus duomenis (buvusi reikšme skliausteliuose) ---" << endl;
-
-            cout << "Nauja marke (" << sarasas[i].marke << "): ";
-            cin >> sarasas[i].marke;
-
-            cout << "Naujas modelis (" << sarasas[i].modelis << "): ";
-            cin >> sarasas[i].modelis;
-
-            cout << "Nauji gamybos metai (" << sarasas[i].gamybosMetai << "): ";
-            cin >> sarasas[i].gamybosMetai;
-
-            cout << "Nauja kaina (" << sarasas[i].kaina << "): ";
-            cin >> sarasas[i].kaina;
-
-            cout << "Naujas kuro tipas (" << sarasas[i].kuroTipas << "): ";
-            cin >> sarasas[i].kuroTipas;
-
-            cout << "\nDuomenys sekmingai atnaujinti!" << endl;
-            return;
-        }
-    }
-    cout << "Automobilis su ID " << redaguojamasId << " nerastas." << endl;
-}
 
 // Funkcija (DELETE): pašalina įrašą iš vektoriaus pagal nurodytą ID
 void trintiAutomobili(vector<Automobilis>& sarasas) {
@@ -392,5 +333,3 @@ void generuotiAtaskaita(const vector<Automobilis>& sarasas) {
 
     cout << "\nStatistine ataskaita sekmingai sugeneruota ir irasyta i faila 'ataskaita.txt'!" << endl;
 }
-
-// Kodo pabaiga
