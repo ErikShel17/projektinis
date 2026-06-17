@@ -244,3 +244,153 @@ void redaguotiAutomobili(vector<Automobilis>& sarasas) {
     }
     cout << "Automobilis su ID " << redaguojamasId << " nerastas." << endl;
 }
+// Funkcija (CREATE): sukuria naują įrašą ir automatiškai suteikia jam unikalų ID
+void pridetiAutomobili(vector<Automobilis>& sarasas) {
+    Automobilis naujas;
+
+    // Automatinis ID generavimas (surandamas didžiausias esamas ID ir pridedamas 1)
+    int maxId = 0;
+    for (size_t i = 0; i < sarasas.size(); i++) {
+        if (sarasas[i].id > maxId) {
+            maxId = sarasas[i].id;
+        }
+    }
+    naujas.id = maxId + 1;
+
+    cout << "Iveskite marke: ";
+    cin >> naujas.marke;
+    cout << "Iveskite modeli: ";
+    cin >> naujas.modelis;
+    cout << "Iveskite gamybos metus: ";
+    cin >> naujas.gamybosMetai;
+    cout << "Iveskite kaina: ";
+    cin >> naujas.kaina;
+    cout << "Iveskite kuro tipa (Benzinas/Dyzelinas/Dujos/Hibridas): ";
+    cin >> naujas.kuroTipas;
+
+    sarasas.push_back(naujas);
+    cout << "\nAutomobilis sekmingai pridetas! Suteiktas ID: " << naujas.id << endl;
+}
+
+// Funkcija (UPDATE): redaguoja jau egzistuojantį automobilio įrašą pagal ID
+void redaguotiAutomobili(vector<Automobilis>& sarasas) {
+    int redaguojamasId;
+    cout << "Iveskite automobilio ID, kuri norite redaguoti: ";
+    cin >> redaguojamasId;
+
+    for (size_t i = 0; i < sarasas.size(); i++) {
+        if (sarasas[i].id == redaguojamasId) {
+            cout << "\n--- Iveskite naujus duomenis (buvusi reikšme skliausteliuose) ---" << endl;
+
+            cout << "Nauja marke (" << sarasas[i].marke << "): ";
+            cin >> sarasas[i].marke;
+
+            cout << "Naujas modelis (" << sarasas[i].modelis << "): ";
+            cin >> sarasas[i].modelis;
+
+            cout << "Nauji gamybos metai (" << sarasas[i].gamybosMetai << "): ";
+            cin >> sarasas[i].gamybosMetai;
+
+            cout << "Nauja kaina (" << sarasas[i].kaina << "): ";
+            cin >> sarasas[i].kaina;
+
+            cout << "Naujas kuro tipas (" << sarasas[i].kuroTipas << "): ";
+            cin >> sarasas[i].kuroTipas;
+
+            cout << "\nDuomenys sekmingai atnaujinti!" << endl;
+            return;
+        }
+    }
+    cout << "Automobilis su ID " << redaguojamasId << " nerastas." << endl;
+}
+
+// Funkcija (DELETE): pašalina įrašą iš vektoriaus pagal nurodytą ID
+void trintiAutomobili(vector<Automobilis>& sarasas) {
+    int trunamasId;
+    cout << "Iveskite automobilio ID, kuri norite pasalinti: ";
+    cin >> trunamasId;
+
+    // Naudojame iteratorius elemento trynimui iš vector struktūros
+    for (auto it = sarasas.begin(); it != sarasas.end(); ++it) {
+        if (it->id == trunamasId) {
+            sarasas.erase(it); // Pašalina elementą ir pastumia likusius
+            cout << "\nAutomobilis sekmingai pasalintas iš sistemos." << endl;
+            return;
+        }
+    }
+    cout << "Automobilis su ID " << trunamasId << " nerastas." << endl;
+}
+
+// 1 PAPILDOMA FUNKCIJA: Duomenų filtravimas pagal markę
+void filtruotiPagalMarke(const vector<Automobilis>& sarasas) {
+    string ieskomaMarke;
+    cout << "Iveskite marke, pagal kuria norite filtruoti (pvz., Audi): ";
+    cin >> ieskomaMarke;
+
+    bool rasta = false;
+    cout << "\n" << string(75, '-') << endl;
+    cout << left << setw(5) << "ID" << setw(15) << "Marke" << setw(15) << "Modelis"
+        << setw(10) << "Metai" << setw(15) << "Kaina (EUR)" << setw(15) << "Kuras" << endl;
+    cout << string(75, '-') << endl;
+
+    for (size_t i = 0; i < sarasas.size(); i++) {
+        if (sarasas[i].marke == ieskomaMarke) {
+            cout << left << setw(5) << sarasas[i].id
+                << setw(15) << sarasas[i].marke
+                << setw(15) << sarasas[i].modelis
+                << setw(10) << sarasas[i].gamybosMetai
+                << setw(15) << fixed << setprecision(2) << sarasas[i].kaina
+                << setw(15) << sarasas[i].kuroTipas << endl;
+            rasta = true;
+        }
+    }
+    cout << string(75, '-') << endl;
+
+    if (!rasta) {
+        cout << "Automobiliu su marke '" << ieskomaMarke << "' nerasta." << endl;
+    }
+}
+
+// 2 PAPILDOMA FUNKCIJA: Ataskaitos generavimas i tekstinį failą
+void generuotiAtaskaita(const vector<Automobilis>& sarasas) {
+    if (sarasas.empty()) {
+        cout << "Sarasas tuscias, ataskaitos generuoti negalima." << endl;
+        return;
+    }
+
+    double bendraKaina = 0;
+    int naujausiMetai = sarasas[0].gamybosMetai;
+    Automobilis brangiausias = sarasas[0];
+
+    // Algoritmas statistiniams rodikliams skaičiuoti (Ciklas per visus įrašus)
+    for (size_t i = 0; i < sarasas.size(); i++) {
+        bendraKaina += sarasas[i].kaina;
+
+        if (sarasas[i].gamybosMetai > naujausiMetai) {
+            naujausiMetai = sarasas[i].gamybosMetai;
+        }
+
+        if (sarasas[i].kaina > brangiausias.kaina) {
+            brangiausias = sarasas[i];
+        }
+    }
+
+    double vidutineKaina = bendraKaina / sarasas.size();
+
+    // Ataskaitos failo kūrimas ir įrašymas
+    ofstream fAtaskaita("ataskaita.txt");
+    fAtaskaita << "=========================================\n";
+    fAtaskaita << "        AUTOMOBILIU DUOMENU ATASKAITA    \n";
+    fAtaskaita << "=========================================\n";
+    fAtaskaita << "Is viso automobiliu bazėje: " << sarasas.size() << " vnt.\n";
+    fAtaskaita << "Vidutine automobilio kaina: " << fixed << setprecision(2) << vidutineKaina << " EUR\n";
+    fAtaskaita << "Naujausi gamybos metai sarase: " << naujausiMetai << " m.\n";
+    fAtaskaita << "Brangiausias automobilis: " << brangiausias.marke << " " << brangiausias.modelis
+        << " (Kaina: " << brangiausias.kaina << " EUR)\n";
+    fAtaskaita << "=========================================\n";
+    fAtaskaita.close();
+
+    cout << "\nStatistine ataskaita sekmingai sugeneruota ir irasyta i faila 'ataskaita.txt'!" << endl;
+}
+
+add this last half of the code left
